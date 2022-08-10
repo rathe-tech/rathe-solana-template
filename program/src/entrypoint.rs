@@ -12,9 +12,9 @@ pub fn process_instruction(
     accounts: &[AccountInfo],
     instruction_data: &[u8],
 ) -> ProgramResult {
-    // if let Err(error) = Processor::process_instruction(program_id, accounts, instruction_data) {
-    //     error.print::<CustomError>();
-    //     return Err(error);
-    // }
+    if let Err(error) = Processor::process_instruction(program_id, accounts, instruction_data) {
+        error.print::<CustomError>();
+        return Err(error);
+    }
     Ok(())
 }
