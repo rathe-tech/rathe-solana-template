@@ -7,4 +7,4 @@ updates:
     time: "06:00"
     timezone: "Etc/UTC"
   labels:
-    - "create deps"
+    - "crate deps"
