@@ -17,6 +17,7 @@ jobs:
       - name: Setup BPF (solana)
         run: |
           sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
+          export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
       - name: Lint
         run: |
           cargo fmt --all -- --check
