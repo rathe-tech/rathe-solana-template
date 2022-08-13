@@ -1,0 +1,31 @@
+name: CI
+
+on: push
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+    - name: Setup Rust (rustup)
+      run: |
+        rustup update stable --no-self-update
+        rustup default stable
+        rustup component add clippy-preview
+        rustup component add rustfmt
+    - name: Setup BPF (solana)
+      run: |
+        sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
+    - name: Lint
+      run: |
+        cargo fmt --all -- --check
+        cargo clippy --all --tests
+    - name: Build and Test
+      run: |
+        cargo build -p client --verbose
+        cargo test -p client --verbose
+        cargo build -p program --verbose
+        cargo test -p program --verbose
+        cargo build-bpf --manifest-path program/Cargo.toml
+        cargo test-bpf --manifest-path program/Cargo.toml

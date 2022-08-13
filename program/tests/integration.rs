@@ -3,4 +3,4 @@
 use solana_program_test::tokio;
 
 #[tokio::test]
-fn test() {}
+async fn test() {}
